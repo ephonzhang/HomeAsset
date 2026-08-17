@@ -1,0 +1,314 @@
+/* ============ 设计 Token（纸感报告 · 明暗主题） ============ */
+:root {
+  color-scheme: light;
+  /* 纸感报告色板 */
+  --paper: #faf7f0;          /* 纸底 */
+  --navy: #16324a;           /* 深海军蓝（封面/强调面） */
+  --navy-deep: #0f2436;
+  --gold: #c9a96a;           /* 香槟金 */
+  --gold-soft: #f3ebdd;       /* 香槟金 浅底 */
+  --gold-deep: #b8914e;
+  --gold-deeper: #8c6a2f;
+  --ink: #20262e;            /* 墨色主文本 */
+  --ink-soft: #5c6570;       /* 次级文本 */
+  --ink-faint: #8c94a0;      /* 弱文本 */
+  --up: #c0392b;             /* 涨/盈 红 */
+  --down: #1f7a5c;           /* 跌/亏 绿 */
+  --line: #e5decd;           /* 分隔线 */
+  --line-soft: #efe9db;
+  --surface: #ffffff;        /* 卡面 */
+  --surface-tint: #f0efea;   /* 浅染色面 */
+  --surface-hover: #f7f4ec;
+  --shadow: 0 1px 2px rgba(32, 38, 46, 0.05), 0 6px 20px rgba(32, 38, 46, 0.05);
+
+  /* 图表序列色（低饱和报告感） */
+  --c1: #16324a;
+  --c2: #c9a96a;
+  --c3: #8c94a0;
+  --c4: #b8914e;
+  --c5: #4a6b8a;
+  --c6: #a8574c;
+  --c7: #5e7d6e;
+  --c8: #7a6a4f;
+  --c9: #6b5b8e;
+  --c10: #7b8894;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --font-serif: "Songti SC", "STSong", "Noto Serif SC", Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #14181d;
+  --navy: #1d3554;
+  --navy-deep: #0f2233;
+  --gold: #c9a96a;
+  --gold-soft: #2a2316;
+  --gold-deep: #b8914e;
+  --gold-deeper: #c9a96a;
+  --ink: #eef0f3;
+  --ink-soft: #c0c6cf;
+  --ink-faint: #8a919c;
+  --up: #e07a6c;
+  --down: #4d9d7c;
+  --line: #2b3138;
+  --line-soft: #22272e;
+  --surface: #1b2027;
+  --surface-tint: #232932;
+  --surface-hover: #262d37;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.35);
+
+  --c1: #6f93b8;
+  --c2: #c9a96a;
+  --c3: #8a919c;
+  --c4: #b8914e;
+  --c5: #6f93b8;
+  --c6: #c0816f;
+  --c7: #7ba08e;
+  --c8: #a08d68;
+  --c9: #9483b8;
+  --c10: #93a0ac;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+/* ============ 通用组件 ============ */
+
+.card {
+  background: var(--surface);
+  border: 0.5px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.card-pad {
+  padding: 1rem 1.25rem;
+}
+
+/* 衬线标题 */
+.serif-title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.kpi-label {
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+.kpi-value {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 0;
+}
+
+.section-hint {
+  font-size: 12px;
+  color: var(--ink-faint);
+  margin: 2px 0 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 0.5px solid var(--line);
+  background: var(--surface-tint);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.chip-gold {
+  color: var(--gold-deeper);
+  border-color: var(--gold);
+  background: transparent;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 0.5px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+  border-radius: var(--radius-sm);
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+}
+
+.btn-navy {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #f3ebdd;
+}
+
+.btn-navy:hover {
+  background: var(--navy-deep);
+  border-color: var(--navy-deep);
+  color: #fff;
+}
+
+.btn-gold {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.btn-gold:hover {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+}
+
+.input,
+.select {
+  border: 0.5px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--gold-deep);
+}
+
+.input::placeholder {
+  color: var(--ink-faint);
+}
+
+/* 表格 */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--ink-faint);
+  padding: 10px 12px;
+  border-bottom: 0.5px solid var(--line);
+  white-space: nowrap;
+  background: var(--surface-tint);
+}
+
+.table td {
+  padding: 11px 12px;
+  border-bottom: 0.5px solid var(--line-soft);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.table tbody tr:hover td {
+  background: var(--surface-hover);
+}
+
+.table tfoot td {
+  font-weight: 500;
+  color: var(--ink);
+  border-top: 0.5px solid var(--line);
+  background: var(--surface-tint);
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.up {
+  color: var(--up);
+  font-weight: 500;
+}
+
+.down {
+  color: var(--down);
+  font-weight: 500;
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* 动效 */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.18s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
