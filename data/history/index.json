@@ -1,0 +1,198 @@
+{
+  "generatedAt": "2026-06-08T14:11:36.973Z",
+  "today": "2026-06-08",
+  "snapshots": [
+    {
+      "date": "2026-06-08",
+      "recordedAt": "2026-06-08T14:10:54.668Z",
+      "json": "/data/history/2026-06-08.json",
+      "csv": "/data/history/2026-06-08.csv",
+      "summary": {
+        "totalAssets": 21203332.35,
+        "grossDividend": 450811.03,
+        "dividendTax": 16366.71,
+        "netDividend": 434444.31,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": false
+    },
+    {
+      "date": "2026-06-07",
+      "recordedAt": "2026-06-08T14:11:36.968Z",
+      "json": "/data/history/2026-06-07.json",
+      "csv": "/data/history/2026-06-07.csv",
+      "summary": {
+        "totalAssets": 20948556.88,
+        "grossDividend": 450811.05,
+        "dividendTax": 16366.72,
+        "netDividend": 434444.34,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-06-06",
+      "recordedAt": "2026-06-08T14:11:36.736Z",
+      "json": "/data/history/2026-06-06.json",
+      "csv": "/data/history/2026-06-06.csv",
+      "summary": {
+        "totalAssets": 20948556.88,
+        "grossDividend": 450811.05,
+        "dividendTax": 16366.72,
+        "netDividend": 434444.34,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-06-05",
+      "recordedAt": "2026-06-08T14:11:36.486Z",
+      "json": "/data/history/2026-06-05.json",
+      "csv": "/data/history/2026-06-05.csv",
+      "summary": {
+        "totalAssets": 20948556.88,
+        "grossDividend": 450811.05,
+        "dividendTax": 16366.72,
+        "netDividend": 434444.34,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-06-04",
+      "recordedAt": "2026-06-08T14:11:36.256Z",
+      "json": "/data/history/2026-06-04.json",
+      "csv": "/data/history/2026-06-04.csv",
+      "summary": {
+        "totalAssets": 21838464.1,
+        "grossDividend": 450811.05,
+        "dividendTax": 16366.72,
+        "netDividend": 434444.34,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-06-03",
+      "recordedAt": "2026-06-08T14:11:36.106Z",
+      "json": "/data/history/2026-06-03.json",
+      "csv": "/data/history/2026-06-03.csv",
+      "summary": {
+        "totalAssets": 21934111.63,
+        "grossDividend": 450811.05,
+        "dividendTax": 16366.72,
+        "netDividend": 434444.34,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-07",
+      "recordedAt": "2026-05-07T14:09:04.706Z",
+      "json": "/data/history/2026-05-07.json",
+      "csv": "/data/history/2026-05-07.csv",
+      "summary": {
+        "totalAssets": 21180242.53,
+        "grossDividend": 451399.9,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.28,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-06",
+      "recordedAt": "2026-05-07T10:41:14.654Z",
+      "json": "/data/history/2026-05-06.json",
+      "csv": "/data/history/2026-05-06.csv",
+      "summary": {
+        "totalAssets": 21171165.72,
+        "grossDividend": 451399.89,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.26,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-05",
+      "recordedAt": "2026-05-07T11:54:50.521Z",
+      "json": "/data/history/2026-05-05.json",
+      "csv": "/data/history/2026-05-05.csv",
+      "summary": {
+        "totalAssets": 20849390.08,
+        "grossDividend": 451399.89,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.26,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-04",
+      "recordedAt": "2026-05-07T11:54:50.186Z",
+      "json": "/data/history/2026-05-04.json",
+      "csv": "/data/history/2026-05-04.csv",
+      "summary": {
+        "totalAssets": 20622779.69,
+        "grossDividend": 451399.89,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.26,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-03",
+      "recordedAt": "2026-05-07T11:54:49.841Z",
+      "json": "/data/history/2026-05-03.json",
+      "csv": "/data/history/2026-05-03.csv",
+      "summary": {
+        "totalAssets": 20650493.36,
+        "grossDividend": 451399.89,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.26,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    },
+    {
+      "date": "2026-05-02",
+      "recordedAt": "2026-05-07T11:54:49.493Z",
+      "json": "/data/history/2026-05-02.json",
+      "csv": "/data/history/2026-05-02.csv",
+      "summary": {
+        "totalAssets": 20650493.36,
+        "grossDividend": 451399.89,
+        "dividendTax": 16481.63,
+        "netDividend": 434918.26,
+        "largestHolding": "QQQM",
+        "topDividendHolding": "GPIQ",
+        "holdingsCount": 11
+      },
+      "locked": true
+    }
+  ]
+}
