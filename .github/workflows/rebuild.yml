@@ -1,0 +1,70 @@
+name: rebuild-and-deploy
+
+# 网页导入的 CSV 由 Worker 提交到 data/inbox/，本流程自动：
+# 抓行情（境外 runner 直连）→ 重算数据文件 → 提交回 main → 构建并发布 gh-pages。
+# 全程约 2–4 分钟，结束后 GitHub Pages 即为最新数据。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/inbox/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rebuild-and-deploy
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: 抓取行情
+        run: python scripts/cloud_fetch.py
+
+      - name: 重算数据文件
+        run: python scripts/cloud_rebuild.py
+
+      - name: 提交重建结果
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- public/data; then
+            echo "数据无变化，跳过提交"
+          else
+            git add public/data
+            git commit -m "rebuild: 行情与持仓更新至 $(date -u +%F)"
+            git push
+          fi
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: 安装依赖
+        run: npm ci
+
+      - name: 构建
+        run: npm run build
+
+      - name: 发布到 gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          force_orphan: true
+          commit_message: "deploy: ${{ github.sha }}"
