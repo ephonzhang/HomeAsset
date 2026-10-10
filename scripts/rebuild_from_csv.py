@@ -78,8 +78,38 @@ print("原 fx 末日:    ", {k: max(v) for k, v in fx.items()})
 
 # ---------- 合并新抓取的行情 ----------
 new = json.load(open(MARKET_CACHE))
-PRICE_MAP = {k: k for k in ["QQQM","VOO","QNDX","BITB","IYW","CGDV","SMH","0883.HK","0700.HK","000660.KS","690D.DE"]}
+PRICE_MAP = {k: k for k in ["QQQM","VOO","QNDX","BITB","IYW","CGDV","SMH","TLT","0883.HK","0700.HK","000660.KS","690D.DE"]}
 FX_MAP = {"USDCNY_X": "USD", "HKDCNY_X": "HKD", "EURCNY_X": "EUR", "KRWCNY_X": "KRW"}
+
+# 新增标的一次性股息口径（现有 portfolio.json 里没有，无法「沿用」）
+# TLT：iShares 20+ 年期美国国债 ETF；近 12 个月实际派息（2025-11 ~ 2026-10 共 12 期）
+# 数据源：Nasdaq 派息记录 API，取最近 12 期合计 $3.8914；美股 ETF 股息税按既有惯例 10%
+EXTRAS = {
+    "TLT": {
+        "name": "安硕20年期以上美国国债ETF",
+        "dps": "3.8914 USD",
+        "amount": 3.8914,
+        "ccy": "USD",
+        "tax": 10.0,
+        "source": "腾讯行情 2026-10-09 收盘 / Nasdaq 派息记录（近12个月实际派息 12 期）",
+    },
+}
+
+# 行情来源口径修正：本次价格取自腾讯（美股/港股）、Naver（韩股）、德交所 XETR（D股）
+SOURCE_OVERRIDE = {
+    "QQQM": "腾讯行情 2026-10-09 收盘 / StockAnalysis distributions",
+    "VOO": "腾讯行情 2026-10-09 收盘 / StockAnalysis distributions",
+    "IYW": "腾讯行情 2026-10-09 收盘 / StockAnalysis distributions",
+    "CGDV": "腾讯行情 2026-10-09 收盘 / StockAnalysis distributions",
+    "QNDX": "腾讯行情 2026-10-09 收盘 / 股息待核验",
+    "SMH": "腾讯行情 2026-10-09 收盘 / 股息待核验",
+    "BITB": "腾讯行情 2026-10-09 收盘 / 无分红",
+    "0883.HK": "腾讯行情 2026-10-09 港股收盘 / CNOOC 2025 年报股息",
+    "0700.HK": "腾讯行情 2026-10-09 港股收盘 / Tencent 2025 股息",
+    "690D.DE": "德交所 XETR 2026-10-09 收盘 / StockAnalysis distributions",
+    "000660.KS": "Naver 行情 2026-10-08 收盘（10-09 韩国开天节休市） / 公告股息 KRW 375 除息 2026-09-03",
+    "BYTE": "用户固定口径：229.5 USD/股；无分红",
+}
 
 # 只补充「原来没有的新日期」，绝不覆盖已有日期的值
 # （原序列的汇率是人民币中间价口径，与 Yahoo 市场价有约 0.2% 差异，覆盖会篡改历史）
@@ -206,6 +236,13 @@ for r in old["rows"]:
         "tax": float(str(r.get("适用股息税率", "0")).replace("%", "") or 0),
         "source": refresh_source(r.get("官方数据来源", ""), code),
     }
+# 新增标的一次性口径
+for code, ex in EXTRAS.items():
+    div_meta.setdefault(code, ex)
+# 来源口径修正
+for code, src in SOURCE_OVERRIDE.items():
+    if code in div_meta:
+        div_meta[code]["source"] = src
 
 # ---------- 重建 portfolio 行 ----------
 last = days[-1]
