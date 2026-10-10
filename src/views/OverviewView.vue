@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
+import { computed, onMounted } from "vue";
 import { usePortfolioStore } from "../stores/portfolio";
-import { loadDailyHoldings, type DailyHoldingsData } from "../lib/portfolioData";
+import type { DailyHoldingsData } from "../lib/portfolioData";
 import EChart from "../components/EChart.vue";
 import ChapterHero from "../components/ChapterHero.vue";
 import { chapters } from "../lib/chapters";
 
 const store = usePortfolioStore();
-const daily = ref<DailyHoldingsData | null>(null);
+const daily = computed<DailyHoldingsData | null>(() => store.daily);
 const me = chapters[0];
 
 const numberFormatter = new Intl.NumberFormat("zh-CN", {
@@ -33,7 +33,6 @@ const chartSeries = ["#16324a", "#c9a96a", "#8c94a0", "#b8914e", "#4a6b8a", "#a8
 
 onMounted(async () => {
   await store.load();
-  daily.value = await loadDailyHoldings();
 });
 
 /** 基于每日持仓：较上一交易日涨跌（无每日数据时回退为空） */
@@ -45,6 +44,11 @@ const assetDelta = computed(() => {
   if (!prev) return null;
   return { delta: cur - prev, pct: ((cur - prev) / prev) * 100 };
 });
+
+/** 持仓速览：按税后股息降序 Top 6 */
+const topDividendRows = computed(() =>
+  [...store.holdingRows].sort((a, b) => b.netDividend - a.netDividend).slice(0, 6)
+);
 
 /** 净值迷你曲线：最近 90 天总资产 */
 const sparkOption = computed(() => {
@@ -146,7 +150,7 @@ function exportCsv() {
           <p class="hero-number serif-title">{{ compactMoney(store.totalAssets) }}</p>
           <div class="hero-meta">
             <span v-if="assetDelta" class="hero-badge" :class="assetDelta.pct >= 0 ? 'badge-up' : 'badge-down'">
-              {{ assetDelta.pct >= 0 ? "较上日 +" : "较上日 " }}{{ formatPercent(Math.abs(assetDelta.pct)) }}
+              {{ assetDelta.pct >= 0 ? "较上日 +" : "较上日 " }}{{ formatPercent(assetDelta.pct) }}
             </span>
             <span class="hero-meta-text">组合税后股息率 {{ formatPercent(store.dividendYield) }}</span>
           </div>
@@ -195,7 +199,7 @@ function exportCsv() {
           <div class="holdings-head">
             <div>
               <h3 class="section-title serif-title">持仓速览</h3>
-              <p class="section-hint">按市值降序 Top 标的</p>
+              <p class="section-hint">按税后股息降序 Top 标的</p>
             </div>
             <router-link to="/holdings" class="link-gold">查看完整持仓 →</router-link>
           </div>
@@ -203,7 +207,7 @@ function exportCsv() {
             <div class="mini-row mini-head">
               <span>代码</span><span>名称</span><span class="right">市值</span><span class="right">仓位</span><span class="right">税后股息</span>
             </div>
-            <div v-for="row in store.holdingRows.slice(0, 6)" :key="row.code" class="mini-row">
+            <div v-for="row in topDividendRows" :key="row.code" class="mini-row">
               <span class="code-cell">{{ row.code }}</span>
               <span class="name-cell">{{ row.name }}</span>
               <span class="right num">{{ compactMoney(row.marketValue) }}</span>

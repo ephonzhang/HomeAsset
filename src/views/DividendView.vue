@@ -46,6 +46,7 @@ const contributionOption = computed(() => ({
   },
   yAxis: {
     type: "category",
+    inverse: true,
     data: [...store.rows]
       .sort((a, b) => b.netDividend - a.netDividend)
       .slice(0, 10)
@@ -115,7 +116,11 @@ const taxOption = computed(() => ({
   },
   yAxis: {
     type: "category",
-    data: [...store.rows].filter((r) => r.dividendTax > 0).map((r) => r.code),
+    inverse: true,
+    data: [...store.rows]
+      .filter((r) => r.dividendTax > 0)
+      .sort((a, b) => b.dividendTax - a.dividendTax)
+      .map((r) => r.code),
     axisLabel: { fontSize: 11, color: "var(--ink-faint)" },
     axisLine: { lineStyle: { color: "var(--line)" } },
   },
@@ -123,7 +128,10 @@ const taxOption = computed(() => ({
     {
       name: "应缴股息税",
       type: "bar",
-      data: [...store.rows].filter((r) => r.dividendTax > 0).map((r) => r.dividendTax),
+      data: [...store.rows]
+        .filter((r) => r.dividendTax > 0)
+        .sort((a, b) => b.dividendTax - a.dividendTax)
+        .map((r) => r.dividendTax),
       itemStyle: { borderRadius: [0, 6, 6, 0], color: "var(--gold-deep)" },
       barWidth: 16,
     },

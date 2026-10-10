@@ -5,7 +5,9 @@ const routes = [
   { path: "/holdings", name: "holdings", component: () => import("../views/HoldingsView.vue"), meta: { title: "持仓明细" } },
   { path: "/dividend", name: "dividend", component: () => import("../views/DividendView.vue"), meta: { title: "股息分析" } },
   { path: "/history", name: "history", component: () => import("../views/HistoryView.vue"), meta: { title: "历史趋势" } },
+  { path: "/fire", name: "fire", component: () => import("../views/FireView.vue"), meta: { title: "生活方案" } },
   { path: "/settings", name: "settings", component: () => import("../views/SettingsView.vue"), meta: { title: "设置" } },
+  { path: "/import", name: "import", component: () => import("../views/ImportView.vue"), meta: { title: "数据导入" } },
 ];
 
 const router = createRouter({

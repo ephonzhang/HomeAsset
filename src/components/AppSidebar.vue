@@ -44,7 +44,7 @@ const activeIndex = computed(() => {
           >
             <span class="nav-label">{{ item.label }}</span>
           </router-link>
-          <span class="nav-active-bar" :style="{ transform: `translateX(${activeIndex * 100}%)` }" />
+          <span class="nav-active-bar" :style="{ width: 100 / chapters.length + '%', transform: `translateX(${activeIndex * 100}%)` }" />
         </div>
       </div>
     </nav>
@@ -173,7 +173,7 @@ const activeIndex = computed(() => {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 20%; /* 5 等分之一的 tab 宽度，flex 1 平分 */
+  /* 宽度由内联 style 按章节数动态计算，适配第 6 个「数据导入」tab */
   height: 2.5px;
   border-radius: 2px;
   background: var(--gold);

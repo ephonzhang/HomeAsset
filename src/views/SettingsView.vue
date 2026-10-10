@@ -5,7 +5,7 @@ import ChapterHero from "../components/ChapterHero.vue";
 import { chapters } from "../lib/chapters";
 
 const store = usePortfolioStore();
-const me = chapters[4];
+const me = chapters[5];
 
 onMounted(async () => {
   await store.load();

@@ -2,7 +2,6 @@
 import { computed, onMounted, ref } from "vue";
 import { usePortfolioStore } from "../stores/portfolio";
 import {
-  loadDailyHoldings,
   type DailyHoldingsData,
   type DailyDay,
 } from "../lib/portfolioData";
@@ -38,12 +37,11 @@ function cssVar(name: string): string {
 }
 
 /* ============ 每日持仓演进 ============ */
-const daily = ref<DailyHoldingsData | null>(null);
+const daily = computed<DailyHoldingsData | null>(() => store.daily);
 const selectedDate = ref("");
 
 onMounted(async () => {
   await store.load();
-  daily.value = await loadDailyHoldings();
   const days = daily.value?.days ?? [];
   if (days.length) selectedDate.value = days[days.length - 1].date;
 });
@@ -254,7 +252,7 @@ const monthlyTrajectory = computed(() => {
           <p class="kpi-label">区间总资产变动</p>
           <p class="compare-value serif-title num">{{ formatMoney(stats.delta) }}</p>
           <p class="kpi-hint" :class="stats.delta >= 0 ? 'up' : 'down'">
-            幅度 {{ formatPercent(Math.abs(stats.pct)) }}
+            幅度 {{ stats.pct >= 0 ? "+" : "" }}{{ formatPercent(stats.pct) }}
           </p>
         </div>
         <div class="card card-pad compare-card">
@@ -374,7 +372,7 @@ const monthlyTrajectory = computed(() => {
                   {{ m.delta >= 0 ? "+" : "" }}{{ compactMoney(m.delta) }}
                 </td>
                 <td class="num" :class="m.delta >= 0 ? 'up' : 'down'">
-                  {{ m.delta >= 0 ? "+" : "" }}{{ formatPercent(Math.abs(m.pct)) }}
+                  {{ m.pct >= 0 ? "+" : "" }}{{ formatPercent(m.pct) }}
                 </td>
                 <td class="num">{{ m.events }} 笔</td>
               </tr>

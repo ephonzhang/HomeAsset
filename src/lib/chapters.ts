@@ -36,11 +36,25 @@ export const chapters: ChapterMeta[] = [
     intro: "历史快照对比与资产 / 股息的趋势线。",
   },
   {
-    to: "/settings",
+    to: "/fire",
     no: "05",
+    label: "生活方案",
+    sub: "FIRE 生活蓝图",
+    intro: "以天津为坐标、三档年度预算（40 / 60 / 100 万）下的家庭生活蓝图与 FIRE 本金刻度。",
+  },
+  {
+    to: "/settings",
+    no: "06",
     label: "档案",
     sub: "设置与口径",
     intro: "汇率口径、数据来源、导出与系统信息。",
+  },
+  {
+    to: "/import",
+    no: "",
+    label: "数据导入",
+    sub: "CSV 导入",
+    intro: "上传 DivTracker 导出 CSV，浏览器本地解析并刷新整份仪表盘。",
   },
 ];
 
