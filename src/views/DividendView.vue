@@ -222,11 +222,9 @@ const activeMonthDetail = computed(() =>
         </p>
         <div v-if="activeMonthDetail.items.length" class="month-detail-list">
           <div v-for="h in activeMonthDetail.items" :key="h.code + h.exDate" class="month-detail-row">
-            <span class="mdr-left">
-              <span class="mdr-code">{{ h.code }}</span>
-              <span class="mdr-date">除息 {{ h.exDate.slice(5) }} · 到账 {{ h.payDate.slice(5) }}</span>
-            </span>
-            <span class="num up">{{ formatMoney(h.net) }}</span>
+            <span class="mdr-code">{{ h.code }}</span>
+            <span class="num up mdr-amount">{{ formatMoney(h.net) }}</span>
+            <span class="mdr-date">除息 {{ h.exDate.slice(5) }} · 到账 {{ h.payDate.slice(5) }}</span>
           </div>
         </div>
         <p v-else class="section-hint">该月没有任何标的除息。</p>
@@ -382,38 +380,39 @@ const activeMonthDetail = computed(() =>
 
 .month-detail-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 8px;
 }
 
 .month-detail-row {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
-  gap: 10px;
+  column-gap: 12px;
+  row-gap: 1px;
   font-size: 12.5px;
   color: var(--ink-soft);
-  padding: 4px 8px;
+  padding: 6px 10px;
   background: var(--surface-tint);
   border-radius: 6px;
-}
-
-.mdr-left {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  min-width: 0;
 }
 
 .mdr-code {
   font-weight: 500;
   color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mdr-amount {
+  white-space: nowrap;
 }
 
 .mdr-date {
+  grid-column: 1 / -1;
   font-size: 11px;
   color: var(--ink-faint);
-  white-space: nowrap;
 }
 
 .charts-grid {
