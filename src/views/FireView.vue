@@ -289,7 +289,7 @@ const decisions = [
           </div>
           <p class="progress-note">
             {{ hasPortfolio
-              ? `按当前组合市值 ${fmtWan(store.totalAssets)} ÷ 2% 口径目标本金计算`
+              ? `进度 = 当前组合市值 ${fmtWan(store.totalAssets)} × 2% ÷ 对应档位年支出`
               : "等待持仓数据加载..." }}
           </p>
         </div>
