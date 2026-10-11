@@ -193,7 +193,7 @@ function exportCsv() {
           <p class="gain-value num up">{{ compactMoney(store.totalNetDividend) }}</p>
           <p class="kpi-hint">组合税后股息率 {{ formatPercent(store.dividendYield) }}</p>
         </div>
-        <div class="card card-pad gain-card">
+        <div class="card card-pad gain-card gain-card-suggest">
           <p class="kpi-label">建议年支取金额</p>
           <p class="gain-value num">{{ compactMoney(withdrawTotal) }}</p>
           <p class="kpi-hint">按总资产 × 2% 计算 · 月均 {{ compactMoney(withdrawTotal / 12) }}</p>
@@ -339,6 +339,16 @@ function exportCsv() {
   font-weight: 500;
   color: var(--ink);
   margin: 2px 0;
+}
+
+/* 建议年支取金额：用香槟金描边区别于三张「事实型」股息卡片 */
+.gain-card-suggest {
+  border-color: var(--gold);
+}
+
+.gain-card-suggest .kpi-label {
+  color: var(--gold-deeper);
+  font-weight: 500;
 }
 
 .kpi-hint {
