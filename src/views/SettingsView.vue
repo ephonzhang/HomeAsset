@@ -16,18 +16,52 @@ const summary = computed(() => [
   { label: "持仓标的", value: `${store.rows.length} 个` },
 ]);
 
-const fxInfo = [
-  { pair: "USD/CNY", desc: "美股 + BYTE 估值口径" },
-  { pair: "HKD/CNY", desc: "港股估值口径" },
-  { pair: "EUR/CNY", desc: "690D.DE 估值口径" },
-  { pair: "KRW/CNY", desc: "000660.KS 估值口径" },
+const FX_META = [
+  { cur: "USD", pair: "USD/CNY", desc: "美股 + BYTE 估值口径" },
+  { cur: "HKD", pair: "HKD/CNY", desc: "港股估值口径" },
+  { cur: "EUR", pair: "EUR/CNY", desc: "690D.DE 估值口径" },
+  { cur: "KRW", pair: "KRW/CNY", desc: "000660.KS 估值口径" },
 ];
 
+/** 汇率量级差异大（USD≈6.7 / KRW≈0.005），按量级自适应小数位，避免小币种被抹成 0.00 */
+function fmtFx(v: number): string {
+  const dp = v >= 1 ? 4 : v >= 0.01 ? 6 : 8;
+  return v.toFixed(dp);
+}
+
+/** 每种币种取序列里最后一个交易日（YYYY-MM-DD，可直接字典序比较） */
+function latestOf(series: Record<string, number> | undefined): { date: string; value: number } | null {
+  if (!series) return null;
+  const dates = Object.keys(series).sort();
+  if (!dates.length) return null;
+  const date = dates[dates.length - 1];
+  return { date, value: series[date] };
+}
+
+const fxRates = computed(() =>
+  FX_META.map((m) => {
+    const hit = latestOf(store.daily?.fx?.[m.cur]);
+    return {
+      ...m,
+      value: hit ? fmtFx(hit.value) : "—",
+      date: hit?.date ?? "",
+    };
+  }),
+);
+
+/** 整组汇率的统一口径日（取各币种最新日里最早的那个，代表共同可用日） */
+const fxAsOf = computed(() => {
+  const dates = fxRates.value.map((f) => f.date).filter(Boolean).sort();
+  return dates.length ? dates[0] : null;
+});
+
 const dataSources = [
-  { name: "Yahoo Finance", desc: "美股、港股、韩股、D 股行情与股息" },
+  { name: "腾讯行情", desc: "美股 ETF、港股收盘价" },
+  { name: "Naver 行情", desc: "000660.KS 韩股收盘价" },
   { name: "Deutsche Börse Live", desc: "690D.DE 首选官方行情（XETR）" },
-  { name: "中国货币网 / CFETS", desc: "人民币中间价汇率" },
-  { name: "用户固定口径", desc: "BYTE 229.5 USD/股，无分红" },
+  { name: "新浪外汇", desc: "USD / HKD / EUR / KRW 对人民币即期汇率" },
+  { name: "StockAnalysis / Nasdaq", desc: "ETF 与国债派息记录" },
+  { name: "用户固定口径", desc: "BYTE 241.35 USD/股，无分红" },
 ];
 
 function exportCsv() {
@@ -82,11 +116,16 @@ function exportJson() {
 
     <section class="card card-pad">
       <h3 class="section-title serif-title">汇率口径</h3>
-      <p class="section-hint">不同币种资产使用对应的汇率换算人民币</p>
-      <div class="info-grid">
-        <div v-for="fx in fxInfo" :key="fx.pair" class="info-item">
-          <span class="info-key">{{ fx.pair }}</span>
-          <span class="info-desc">{{ fx.desc }}</span>
+      <p class="section-hint">
+        不同币种资产按对应的<b>即期汇率</b>换算人民币（口径为市场即期价，非中间价）<template v-if="fxAsOf">，汇率截至 <b>{{ fxAsOf }}</b></template>
+      </p>
+      <div class="fx-grid">
+        <div v-for="fx in fxRates" :key="fx.pair" class="fx-item">
+          <div class="fx-row">
+            <span class="fx-pair">{{ fx.pair }}</span>
+            <span class="fx-value num">{{ fx.value }}</span>
+          </div>
+          <span class="fx-desc">{{ fx.desc }}</span>
         </div>
       </div>
     </section>
@@ -188,6 +227,52 @@ function exportJson() {
 
 .info-desc {
   font-size: 12px;
+  color: var(--ink-faint);
+}
+
+/* ===== 汇率口径：把实际取到的汇率直接摊开 ===== */
+.fx-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.fx-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  border: 0.5px solid var(--line-soft);
+  border-radius: var(--radius-md);
+  background: var(--surface-tint);
+}
+
+.fx-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.fx-pair {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.fx-value {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.fx-desc {
+  font-size: 11.5px;
   color: var(--ink-faint);
 }
 
