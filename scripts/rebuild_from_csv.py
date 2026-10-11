@@ -23,7 +23,7 @@ MARKET_CACHE = _args.market_cache
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 START = "2026-01-01"
 BASELINE_CUTOFF = "2025-12-31"
-BYTE_SHARES, BYTE_PRICE = 171, 229.5
+BYTE_SHARES, BYTE_PRICE = 171, 241.35
 
 # ---------- 读交易 ----------
 def norm(t):
@@ -108,7 +108,7 @@ SOURCE_OVERRIDE = {
     "0700.HK": "腾讯行情 2026-10-09 港股收盘 / Tencent 2025 股息",
     "690D.DE": "德交所 XETR 2026-10-09 收盘 / StockAnalysis distributions",
     "000660.KS": "Naver 行情 2026-10-08 收盘（10-09 韩国开天节休市） / 公告股息 KRW 375 除息 2026-09-03",
-    "BYTE": "用户固定口径：229.5 USD/股；无分红",
+    "BYTE": "用户固定口径：241.35 USD/股；无分红",
 }
 
 # 只补充「原来没有的新日期」，绝不覆盖已有日期的值
