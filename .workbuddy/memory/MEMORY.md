@@ -97,10 +97,23 @@ SMH **149**、0700.HK 1500、CGDV 1500、690D.DE 30000、BYTE 171、**TLT 242**�
 - 2026-09-01 起前端已加固：存档写入结果可见（「已存档 · IndexedDB / localStorage 兜底 / 未存档」），
   失败时拦截跳转并明确告警；导入页支持「导出/恢复存档 JSON」。
 
+## 派息日历 / 股息数据管线（2026-10-11 起）
+- **原始派息记录唯一来源：`data/dividend-events.json`**（除息日/到账日/每股金额/币种/来源，13 标的）。
+  新增分红 → 追加一条记录即可，别在别处硬编码。
+- `scripts/build_dividends.py` 生成 `public/data/dividends.json`（窗口 `(asOf-1年, asOf]`、快照日汇率、
+  最大余数法按分分摊 → 标的级/月份级/总表三处逐分一致）。`--write-portfolio` 同时刷新 `portfolio.json` + `portfolio.csv` 股息列。
+- 前端股息页（`DividendView.vue`）**只读 `dividends.json`**，不再有任何占位/估算算法；缺文件时优雅提示。
+- 行情/派息取数（沙箱内走代理 `-x 127.0.0.1:7897`）：
+  - 美股 + 港股：`westock dividend <code> --years 2`（需先 `bash <skill>/scripts/setup.sh` 装到 `~/.local/bin/westock`）
+  - Yahoo chart API `?events=div` **会 429 限流**，别批量跑；
+  - 韩股 westock 无数据 → 用 StockAnalysis；德股 D 股 → 海尔智家分红公告。
+- ⚠️ **数据重建流程尚未接入股息刷新**：`rebuild_from_csv.py` 仍沿用 `portfolio.json` 的旧股息与旧来源文案。
+
 ## 关键约定
 - BYTE：**241.35** × 171 份 = **¥276,221.67**（USD/CNY 6.6929），零股息，除非用户明确要求更新。
   （2026-10-11 用户明确把 BYTE 单价 229.5 → **241.35 USD/份**，全部 282 天历史与总资产已同步重算。）
 - BITB：零股息。
-- 000660.KS：韩股 SK海力士，股息税按 10%（2026-08-15 用户改为 10%）。
+- TLT：**股息税 0%**（2026-10-11 用户明确；美债利息按 portfolio interest exemption 不预扣）。按**月**派息。
+- 000660.KS：韩股 SK海力士，股息税按 **22%**（2026-10-11 用户明确更正，原 10%）；**按季派息**，不是年度。
 - 汇率：美股+BYTE 用 USD/CNY；港股用 HKD/CNY；690D.DE 用 EUR/CNY；000660.KS 用 KRW/CNY。
 - 用户偏好：暂不计算成本价与收益，只维护持仓快照与股息口径。

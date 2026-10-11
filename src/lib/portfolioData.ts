@@ -66,6 +66,63 @@ export async function loadDailyHoldings(): Promise<DailyHoldingsData | null> {
   return (await response.json()) as DailyHoldingsData;
 }
 
+/* ============ 派息日历（dividends.json） ============ */
+
+export type DividendEvent = {
+  code: string;
+  /** 除息日 YYYY-MM-DD */
+  exDate: string;
+  /** 现金到账日 YYYY-MM-DD */
+  payDate: string;
+  /** 每股分红（原生币种） */
+  perShare: number;
+  currency: string;
+  gross: number;
+  tax: number;
+  net: number;
+};
+
+export type DividendMonth = {
+  month: number;
+  /** 该月所属年份（近 12 个月跨年，故需标注） */
+  year: string | null;
+  gross: number;
+  tax: number;
+  net: number;
+  items: DividendEvent[];
+};
+
+export type DividendInstrument = {
+  code: string;
+  currency: string;
+  shares: number;
+  taxRate: number;
+  periods: number;
+  perShareTotal: number;
+  gross: number;
+  tax: number;
+  net: number;
+  source: string;
+  events: DividendEvent[];
+};
+
+export type DividendCalendar = {
+  generatedAt: string;
+  asOf: string;
+  window: { startExclusive: string; endInclusive: string };
+  basis: string;
+  fx: Record<string, number>;
+  totals: { gross: number; tax: number; net: number };
+  instruments: DividendInstrument[];
+  months: DividendMonth[];
+};
+
+export async function loadDividends(): Promise<DividendCalendar | null> {
+  const response = await fetchIfExists(DATA_BASE + "data/dividends.json");
+  if (!response) return null;
+  return (await response.json()) as DividendCalendar;
+}
+
 export const FIELD_MAP: Record<string, string> = {
   sequence: "序号",
   code: "标的代码",

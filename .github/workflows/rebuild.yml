@@ -30,21 +30,30 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: 安装 westock（股息数据源；失败不阻断）
+        continue-on-error: true
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL "https://stockbuddy.qq.com/release/workbuddy/cli/v0.0.4/westock-linux-amd64" \
+            -o "$HOME/.local/bin/westock" && chmod +x "$HOME/.local/bin/westock"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/westock" --help | head -3 || true
+
       - name: 抓取行情
         run: python scripts/cloud_fetch.py
 
-      - name: 重算数据文件
+      - name: 重算数据文件（含派息记录刷新与派息日历）
         run: python scripts/cloud_rebuild.py
 
       - name: 提交重建结果
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- public/data; then
+          if git diff --quiet -- public/data data/dividend-events.json; then
             echo "数据无变化，跳过提交"
           else
-            git add public/data
-            git commit -m "rebuild: 行情与持仓更新至 $(date -u +%F)"
+            git add public/data data/dividend-events.json
+            git commit -m "rebuild: 行情/持仓/派息更新至 $(date -u +%F)"
             git push
           fi
 

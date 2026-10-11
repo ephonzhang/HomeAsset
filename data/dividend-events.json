@@ -1,0 +1,460 @@
+{
+  "generatedAt": "2026-10-11T16:40:00+08:00",
+  "description": "各标的真实分红派息原始记录（除息日 / 到账日 / 每股金额，原生币种）。本文件是派息日历的唯一数据源，不做窗口裁剪；按「近 12 个月」窗口裁剪并用快照汇率折算人民币的逻辑在 scripts/build_dividends.py，产物为 public/data/dividends.json。新增分红时只要往这里追加一条记录。",
+  "instruments": {
+    "QQQM": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+      "records": [
+        {
+          "exDate": "2024-12-23",
+          "payDate": "2024-12-27",
+          "amount": 0.31031
+        },
+        {
+          "exDate": "2025-03-24",
+          "payDate": "2025-03-28",
+          "amount": 0.31763
+        },
+        {
+          "exDate": "2025-06-23",
+          "payDate": "2025-06-27",
+          "amount": 0.3161
+        },
+        {
+          "exDate": "2025-09-22",
+          "payDate": "2025-09-26",
+          "amount": 0.30245
+        },
+        {
+          "exDate": "2025-12-22",
+          "payDate": "2025-12-26",
+          "amount": 0.32301
+        },
+        {
+          "exDate": "2026-03-23",
+          "payDate": "2026-03-27",
+          "amount": 0.32769
+        },
+        {
+          "exDate": "2026-06-22",
+          "payDate": "2026-06-26",
+          "amount": 0.35215
+        },
+        {
+          "exDate": "2026-09-21",
+          "payDate": "2026-09-25",
+          "amount": 0.31266
+        }
+      ]
+    },
+    "VOO": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录",
+      "records": [
+        {
+          "exDate": "2024-12-23",
+          "payDate": "2024-12-26",
+          "amount": 1.7385
+        },
+        {
+          "exDate": "2025-03-27",
+          "payDate": "2025-03-31",
+          "amount": 1.8121
+        },
+        {
+          "exDate": "2025-06-30",
+          "payDate": "2025-07-02",
+          "amount": 1.7447
+        },
+        {
+          "exDate": "2025-09-29",
+          "payDate": "2025-10-01",
+          "amount": 1.74
+        },
+        {
+          "exDate": "2025-12-22",
+          "payDate": "2025-12-24",
+          "amount": 1.771
+        },
+        {
+          "exDate": "2026-03-27",
+          "payDate": "2026-03-31",
+          "amount": 1.8724
+        },
+        {
+          "exDate": "2026-06-26",
+          "payDate": "2026-06-30",
+          "amount": 1.9622
+        },
+        {
+          "exDate": "2026-09-28",
+          "payDate": "2026-09-30",
+          "amount": 1.8226
+        }
+      ]
+    },
+    "QNDX": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+      "records": [
+        {
+          "exDate": "2026-09-21",
+          "payDate": "2026-09-23",
+          "amount": 0.027225
+        }
+      ]
+    },
+    "IYW": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录",
+      "records": [
+        {
+          "exDate": "2024-12-17",
+          "payDate": "2024-12-20",
+          "amount": 0.066068
+        },
+        {
+          "exDate": "2025-03-18",
+          "payDate": "2025-03-21",
+          "amount": 0.075357
+        },
+        {
+          "exDate": "2025-06-16",
+          "payDate": "2025-06-20",
+          "amount": 0.085836
+        },
+        {
+          "exDate": "2025-09-16",
+          "payDate": "2025-09-19",
+          "amount": 0.059573
+        },
+        {
+          "exDate": "2025-12-16",
+          "payDate": "2025-12-19",
+          "amount": 0.055415
+        },
+        {
+          "exDate": "2026-03-17",
+          "payDate": "2026-03-20",
+          "amount": 0.069826
+        },
+        {
+          "exDate": "2026-06-15",
+          "payDate": "2026-06-18",
+          "amount": 0.071819
+        },
+        {
+          "exDate": "2026-09-15",
+          "payDate": "2026-09-18",
+          "amount": 0.049132
+        }
+      ]
+    },
+    "CGDV": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录",
+      "records": [
+        {
+          "exDate": "2024-12-26",
+          "payDate": "2024-12-27",
+          "amount": 0.184867
+        },
+        {
+          "exDate": "2025-03-31",
+          "payDate": "2025-04-01",
+          "amount": 0.106734
+        },
+        {
+          "exDate": "2025-06-30",
+          "payDate": "2025-07-01",
+          "amount": 0.129509
+        },
+        {
+          "exDate": "2025-09-30",
+          "payDate": "2025-10-01",
+          "amount": 0.135864
+        },
+        {
+          "exDate": "2025-12-26",
+          "payDate": "2025-12-29",
+          "amount": 0.192823
+        },
+        {
+          "exDate": "2026-03-31",
+          "payDate": "2026-04-01",
+          "amount": 0.110308
+        },
+        {
+          "exDate": "2026-06-30",
+          "payDate": "2026-07-01",
+          "amount": 0.147088
+        },
+        {
+          "exDate": "2026-09-30",
+          "payDate": "2026-10-01",
+          "amount": 0.152188
+        }
+      ]
+    },
+    "SMH": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+      "records": [
+        {
+          "exDate": "2024-12-23",
+          "payDate": "2024-12-24",
+          "amount": 1.0713
+        },
+        {
+          "exDate": "2025-12-22",
+          "payDate": "2025-12-26",
+          "amount": 1.1047
+        }
+      ]
+    },
+    "TLT": {
+      "market": "US",
+      "currency": "USD",
+      "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录（月度）",
+      "records": [
+        {
+          "exDate": "2024-11-01",
+          "payDate": "2024-11-06",
+          "amount": 0.310541
+        },
+        {
+          "exDate": "2024-12-02",
+          "payDate": "2024-12-05",
+          "amount": 0.325021
+        },
+        {
+          "exDate": "2024-12-18",
+          "payDate": "2024-12-23",
+          "amount": 0.351032
+        },
+        {
+          "exDate": "2025-02-03",
+          "payDate": "2025-02-06",
+          "amount": 0.312282
+        },
+        {
+          "exDate": "2025-03-03",
+          "payDate": "2025-03-06",
+          "amount": 0.289817
+        },
+        {
+          "exDate": "2025-04-01",
+          "payDate": "2025-04-04",
+          "amount": 0.325582
+        },
+        {
+          "exDate": "2025-05-01",
+          "payDate": "2025-05-06",
+          "amount": 0.327612
+        },
+        {
+          "exDate": "2025-06-02",
+          "payDate": "2025-06-05",
+          "amount": 0.319532
+        },
+        {
+          "exDate": "2025-07-01",
+          "payDate": "2025-07-07",
+          "amount": 0.328301
+        },
+        {
+          "exDate": "2025-08-01",
+          "payDate": "2025-08-06",
+          "amount": 0.330802
+        },
+        {
+          "exDate": "2025-09-02",
+          "payDate": "2025-09-05",
+          "amount": 0.328083
+        },
+        {
+          "exDate": "2025-10-01",
+          "payDate": "2025-10-06",
+          "amount": 0.310447
+        },
+        {
+          "exDate": "2025-11-03",
+          "payDate": "2025-11-06",
+          "amount": 0.325125
+        },
+        {
+          "exDate": "2025-12-01",
+          "payDate": "2025-12-04",
+          "amount": 0.320648
+        },
+        {
+          "exDate": "2025-12-19",
+          "payDate": "2025-12-24",
+          "amount": 0.342437
+        },
+        {
+          "exDate": "2026-02-02",
+          "payDate": "2026-02-05",
+          "amount": 0.331885
+        },
+        {
+          "exDate": "2026-03-02",
+          "payDate": "2026-03-05",
+          "amount": 0.300633
+        },
+        {
+          "exDate": "2026-04-01",
+          "payDate": "2026-04-07",
+          "amount": 0.344779
+        },
+        {
+          "exDate": "2026-05-01",
+          "payDate": "2026-05-06",
+          "amount": 0.315346
+        },
+        {
+          "exDate": "2026-06-01",
+          "payDate": "2026-06-04",
+          "amount": 0.335777
+        },
+        {
+          "exDate": "2026-07-01",
+          "payDate": "2026-07-07",
+          "amount": 0.31803
+        },
+        {
+          "exDate": "2026-08-03",
+          "payDate": "2026-08-06",
+          "amount": 0.330454
+        },
+        {
+          "exDate": "2026-09-01",
+          "payDate": "2026-09-04",
+          "amount": 0.314686
+        },
+        {
+          "exDate": "2026-10-01",
+          "payDate": "2026-10-06",
+          "amount": 0.311581
+        }
+      ]
+    },
+    "0883.HK": {
+      "market": "HK",
+      "currency": "HKD",
+      "source": "腾讯自选股(westock) 港股分红记录 / 中国海洋石油公告",
+      "records": [
+        {
+          "exDate": "2025-06-12",
+          "payDate": "2025-07-11",
+          "amount": 0.66
+        },
+        {
+          "exDate": "2025-09-11",
+          "payDate": "2025-10-17",
+          "amount": 0.73
+        },
+        {
+          "exDate": "2026-06-11",
+          "payDate": "2026-07-10",
+          "amount": 0.55
+        },
+        {
+          "exDate": "2026-09-10",
+          "payDate": "2026-10-16",
+          "amount": 0.94
+        }
+      ]
+    },
+    "0700.HK": {
+      "market": "HK",
+      "currency": "HKD",
+      "source": "腾讯自选股(westock) 港股分红记录 / 腾讯控股公告",
+      "records": [
+        {
+          "exDate": "2025-05-16",
+          "payDate": "2025-05-30",
+          "amount": 4.5
+        },
+        {
+          "exDate": "2026-05-15",
+          "payDate": "2026-06-01",
+          "amount": 5.3
+        }
+      ]
+    },
+    "000660.KS": {
+      "market": "KR",
+      "currency": "KRW",
+      "source": "StockAnalysis(KRX:000660) 分红记录（S&P Global 数据源）",
+      "records": [
+        {
+          "exDate": "2025-08-28",
+          "payDate": "2025-09-30",
+          "amount": 375
+        },
+        {
+          "exDate": "2025-11-27",
+          "payDate": "2025-12-30",
+          "amount": 375
+        },
+        {
+          "exDate": "2026-02-26",
+          "payDate": "2026-04-24",
+          "amount": 1875
+        },
+        {
+          "exDate": "2026-05-28",
+          "payDate": "2026-06-30",
+          "amount": 375
+        },
+        {
+          "exDate": "2026-08-28",
+          "payDate": "2026-09-30",
+          "amount": 375
+        }
+      ]
+    },
+    "690D.DE": {
+      "market": "DE",
+      "currency": "EUR",
+      "source": "海尔智家 D 股分红公告（公司投资者关系页 / 法兰克福交易所）",
+      "records": [
+        {
+          "exDate": "2025-07-25",
+          "payDate": "2025-07-25",
+          "amount": 0.118404
+        },
+        {
+          "exDate": "2025-11-07",
+          "payDate": "2025-11-07",
+          "amount": 0.032635
+        },
+        {
+          "exDate": "2026-08-21",
+          "payDate": "2026-08-21",
+          "amount": 0.1141169
+        }
+      ]
+    },
+    "BITB": {
+      "market": "US",
+      "currency": "USD",
+      "source": "Bitwise 现货比特币 ETF —— 不分红",
+      "records": []
+    },
+    "BYTE": {
+      "market": "CN",
+      "currency": "USD",
+      "source": "字节跳动内部期权 —— 不分红（用户固定口径）",
+      "records": []
+    }
+  }
+}

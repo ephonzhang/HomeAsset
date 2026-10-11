@@ -5,7 +5,7 @@
   - 按自然日演进，市值 = 头寸 × 收盘价(nearest) × 汇率(nearest)
   - 股息口径（每股股息、税率、名称、来源）沿用现有 portfolio.json
 """
-import argparse, csv, json, datetime as dt, os, re, sys
+import argparse, csv, json, datetime as dt, os, re, subprocess, sys
 from decimal import Decimal, ROUND_HALF_UP
 
 _ap = argparse.ArgumentParser(description="用 DivTracker 交易 CSV 重算持仓数据文件")
@@ -83,14 +83,15 @@ FX_MAP = {"USDCNY_X": "USD", "HKDCNY_X": "HKD", "EURCNY_X": "EUR", "KRWCNY_X": "
 
 # 新增标的一次性股息口径（现有 portfolio.json 里没有，无法「沿用」）
 # TLT：iShares 20+ 年期美国国债 ETF；近 12 个月实际派息（2025-11 ~ 2026-10 共 12 期）
-# 数据源：Nasdaq 派息记录 API，取最近 12 期合计 $3.8914；美股 ETF 股息税按既有惯例 10%
+# 数据源：Nasdaq 派息记录 API，取最近 12 期合计 $3.8914；
+# 股息税 0% —— 派息来自美国国债利息，按 portfolio interest exemption 不征美国预扣税（2026-10-11 用户明确）
 EXTRAS = {
     "TLT": {
         "name": "安硕20年期以上美国国债ETF",
         "dps": "3.8914 USD",
         "amount": 3.8914,
         "ccy": "USD",
-        "tax": 10.0,
+        "tax": 0.0,
         "source": "腾讯行情 2026-10-09 收盘 / Nasdaq 派息记录（近12个月实际派息 12 期）",
     },
 }
@@ -341,5 +342,20 @@ if _args.write:
         w.writeheader()
         w.writerows(rows)
     print("\n已写入 public/data/{daily-holdings.json, portfolio.json, portfolio.csv}")
+
+    # ---- 收尾：刷新派息记录并重算派息日历 ----
+    # 用户约定（2026-10-11）：每次更新持仓 CSV 后，都要重新查询股息数据并更新。
+    # 两步都做成「失败不影响主流程」：网络/源不可用时只告警，行情与持仓照常落盘。
+    for step, cmd in (
+        ("刷新派息记录", [sys.executable, os.path.join(ROOT, "scripts", "fetch_dividends.py")]),
+        ("重算派息日历与股息列", [sys.executable, os.path.join(ROOT, "scripts", "build_dividends.py"), "--write-portfolio"]),
+    ):
+        print(f"\n--- {step} ---")
+        try:
+            r = subprocess.run(cmd, cwd=ROOT)
+            if r.returncode != 0:
+                print(f"⚠️ {step} 退出码 {r.returncode}，已跳过（不影响持仓数据）")
+        except Exception as e:  # noqa: BLE001
+            print(f"⚠️ {step} 失败：{e}（不影响持仓数据）")
 else:
     print("\n（dry-run，未写入）")

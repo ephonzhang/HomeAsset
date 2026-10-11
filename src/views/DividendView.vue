@@ -4,6 +4,11 @@ import { usePortfolioStore } from "../stores/portfolio";
 import EChart from "../components/EChart.vue";
 import ChapterHero from "../components/ChapterHero.vue";
 import { chapters } from "../lib/chapters";
+import {
+  loadDividends,
+  type DividendCalendar,
+  type DividendMonth,
+} from "../lib/portfolioData";
 
 const store = usePortfolioStore();
 const me = chapters[2];
@@ -29,6 +34,7 @@ function compactMoney(value: number) {
 
 onMounted(async () => {
   if (!store.rows.length) await store.load();
+  calendar.value = await loadDividends();
 });
 
 const contributionOption = computed(() => ({
@@ -138,36 +144,20 @@ const taxOption = computed(() => ({
   ],
 }));
 
-/* ============ 派息日历（新增） ============ */
-type MonthBucket = { month: number; total: number; holdings: { code: string; net: number }[] };
+/* ============ 派息日历（真实除息记录，数据源 public/data/dividends.json） ============ */
+const calendar = ref<DividendCalendar | null>(null);
 const activeMonth = ref<number | null>(null);
 
-const monthBuckets = computed<MonthBucket[]>(() => {
-  // 基于股息来源的月份估算：按每股股息在 4–8 月集中派发的经验分布（示意）
-  // 真实实现应由数据层提供每月派息明细
-  const buckets: MonthBucket[] = Array.from({ length: 12 }, (_, i) => ({
-    month: i + 1,
-    total: 0,
-    holdings: [],
-  }));
-  store.rows.forEach((row) => {
-    if (row.netDividend <= 0) return;
-    const seed = row.code.charCodeAt(0) + row.code.length;
-    const month = 4 + (seed % 5); // 4–8 月
-    const half = row.netDividend / 2;
-    buckets[month - 1].total += half;
-    buckets[month - 1].holdings.push({ code: row.code, net: half });
-    buckets[(month + 2) % 12].total += half;
-    buckets[(month + 2) % 12].holdings.push({ code: row.code, net: half });
-  });
-  return buckets;
+const monthBars = computed<DividendMonth[]>(() => calendar.value?.months ?? []);
+const maxMonthTotal = computed(() => Math.max(1, ...monthBars.value.map((m) => m.net)));
+const calendarWindow = computed(() => {
+  const w = calendar.value?.window;
+  return w ? `${w.startExclusive} ~ ${w.endInclusive}` : "";
 });
 
-const maxMonthTotal = computed(() => Math.max(1, ...monthBuckets.value.map((m) => m.total)));
-
-function monthTone(month: MonthBucket) {
-  const ratio = month.total / maxMonthTotal.value;
-  if (ratio <= 0.05) return { bg: "#f0efea", fg: "#8c94a0" };
+function monthTone(month: DividendMonth) {
+  const ratio = month.net / maxMonthTotal.value;
+  if (ratio <= 0.001) return { bg: "#f0efea", fg: "#8c94a0" };
   if (ratio <= 0.2) return { bg: "#e5e0d0", fg: "#5c6570" };
   if (ratio <= 0.4) return { bg: "#d3c8ae", fg: "#20262e" };
   if (ratio <= 0.6) return { bg: "#b8914e", fg: "#ffffff" };
@@ -175,7 +165,7 @@ function monthTone(month: MonthBucket) {
 }
 
 const activeMonthDetail = computed(() =>
-  activeMonth.value == null ? null : monthBuckets.value[activeMonth.value - 1],
+  activeMonth.value == null ? null : (monthBars.value[activeMonth.value - 1] ?? null),
 );
 </script>
 
@@ -206,30 +196,40 @@ const activeMonthDetail = computed(() =>
       <div class="calendar-head">
         <div>
           <h3 class="section-title serif-title">派息日历</h3>
-          <p class="section-hint">全年 12 月税后派息热力 · 颜色深浅 = 当月派息金额 · 点击月份查看标的明细</p>
+          <p class="section-hint">
+            近 12 个月真实除息记录（{{ calendarWindow }}）· 按除息月份归集 · 颜色深浅 = 当月税后到手股息 · 点击月份查看明细
+          </p>
         </div>
       </div>
-      <div class="calendar-grid">
+      <div v-if="monthBars.length" class="calendar-grid">
         <button
-          v-for="m in monthBuckets"
+          v-for="m in monthBars"
           :key="m.month"
           class="month-cell"
-          :class="{ active: activeMonth === m.month }"
+          :class="{ active: activeMonth === m.month, empty: m.net <= 0 }"
           :style="{ background: monthTone(m).bg, color: monthTone(m).fg }"
           @click="activeMonth = activeMonth === m.month ? null : m.month"
         >
           <span class="month-no">{{ m.month }}月</span>
-          <span class="month-val num">{{ compactMoney(m.total) }}</span>
+          <span class="month-year">{{ m.year }}</span>
+          <span class="month-val num">{{ m.net > 0 ? compactMoney(m.net) : "—" }}</span>
         </button>
       </div>
+      <p v-else class="section-hint">派息日历数据未加载（缺 public/data/dividends.json）。</p>
       <div v-if="activeMonthDetail" class="month-detail">
-        <p class="month-detail-title">{{ activeMonthDetail.month }} 月派息明细（{{ compactMoney(activeMonthDetail.total) }}）</p>
-        <div class="month-detail-list">
-          <div v-for="h in activeMonthDetail.holdings" :key="h.code" class="month-detail-row">
-            <span>{{ h.code }}</span>
+        <p class="month-detail-title">
+          {{ activeMonthDetail.year }} 年 {{ activeMonthDetail.month }} 月派息明细（税后 {{ compactMoney(activeMonthDetail.net) }}）
+        </p>
+        <div v-if="activeMonthDetail.items.length" class="month-detail-list">
+          <div v-for="h in activeMonthDetail.items" :key="h.code + h.exDate" class="month-detail-row">
+            <span class="mdr-left">
+              <span class="mdr-code">{{ h.code }}</span>
+              <span class="mdr-date">除息 {{ h.exDate.slice(5) }} · 到账 {{ h.payDate.slice(5) }}</span>
+            </span>
             <span class="num up">{{ formatMoney(h.net) }}</span>
           </div>
         </div>
+        <p v-else class="section-hint">该月没有任何标的除息。</p>
       </div>
     </section>
 
@@ -356,6 +356,12 @@ const activeMonthDetail = computed(() =>
   font-weight: 500;
 }
 
+.month-year {
+  font-size: 10px;
+  opacity: 0.72;
+  letter-spacing: 0.02em;
+}
+
 .month-val {
   font-size: 12px;
   font-weight: 500;
@@ -383,11 +389,31 @@ const activeMonthDetail = computed(() =>
 .month-detail-row {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
   font-size: 12.5px;
   color: var(--ink-soft);
   padding: 4px 8px;
   background: var(--surface-tint);
   border-radius: 6px;
+}
+
+.mdr-left {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+
+.mdr-code {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.mdr-date {
+  font-size: 11px;
+  color: var(--ink-faint);
+  white-space: nowrap;
 }
 
 .charts-grid {
