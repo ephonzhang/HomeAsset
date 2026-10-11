@@ -173,7 +173,7 @@ const activeIndex = computed(() => {
   position: absolute;
   bottom: 0;
   left: 0;
-  /* 宽度由内联 style 按章节数动态计算，适配第 6 个「数据导入」tab */
+  /* 宽度由内联 style 按章节数动态计算，自动适配章节增减 */
   height: 2.5px;
   border-radius: 2px;
   background: var(--gold);

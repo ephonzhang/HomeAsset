@@ -49,13 +49,6 @@ export const chapters: ChapterMeta[] = [
     sub: "设置与口径",
     intro: "汇率口径、数据来源、导出与系统信息。",
   },
-  {
-    to: "/import",
-    no: "",
-    label: "数据导入",
-    sub: "CSV 导入",
-    intro: "上传 DivTracker 导出 CSV，浏览器本地解析并刷新整份仪表盘。",
-  },
 ];
 
 export function findChapter(path: string): ChapterMeta {
