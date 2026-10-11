@@ -1,6 +1,18 @@
 <script setup lang="ts">
+import { computed, onMounted } from "vue";
 import AppSidebar from "./components/AppSidebar.vue";
 import ThemeToggle from "./components/ThemeToggle.vue";
+import { usePortfolioStore } from "./stores/portfolio";
+import { formatDataDate } from "./lib/portfolioData";
+
+const store = usePortfolioStore();
+
+// 顶栏日期 = 数据日期（portfolio.json 的 date，即最近一次数据落库/上传时间）
+const dataDateLabel = computed(() => (store.dataDate ? formatDataDate(store.dataDate) : "最新数据"));
+
+onMounted(() => {
+  if (!store.dataDate) store.load();
+});
 </script>
 
 <template>
@@ -8,7 +20,7 @@ import ThemeToggle from "./components/ThemeToggle.vue";
     <AppSidebar />
     <div class="app-main">
       <header class="app-topbar">
-        <p class="topbar-date">家庭财富报告 · 2026 年 8 月</p>
+        <p class="topbar-date">家庭财富报告 · {{ dataDateLabel }}</p>
         <ThemeToggle />
       </header>
       <main class="app-content">

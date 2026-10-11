@@ -3,8 +3,14 @@ import { computed } from "vue";
 import { useRoute } from "vue-router";
 import ThemeToggle from "./ThemeToggle.vue";
 import { chapters } from "../lib/chapters";
+import { usePortfolioStore } from "../stores/portfolio";
+import { formatDataDate } from "../lib/portfolioData";
 
 const route = useRoute();
+const store = usePortfolioStore();
+
+// 品牌区副标题 = 数据日期（最近一次数据落库/上传时间），不再写死
+const dataDateLabel = computed(() => (store.dataDate ? formatDataDate(store.dataDate) : "最新数据"));
 
 const activeIndex = computed(() => {
   const idx = chapters.findIndex((item) => route.path === item.to);
@@ -21,7 +27,7 @@ const activeIndex = computed(() => {
           <span class="brand-logo">家</span>
           <span class="brand-text">
             <span class="brand-title serif-title">家庭财富报告</span>
-            <span class="brand-sub">2026 年 8 月 · 第 3 期</span>
+            <span class="brand-sub">{{ dataDateLabel }}</span>
           </span>
         </router-link>
         <div class="brand-actions">

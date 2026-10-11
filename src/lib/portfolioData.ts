@@ -25,6 +25,16 @@ export type PortfolioData = {
   recordedAt?: string;
 };
 
+/**
+ * 把 ISO 日期（YYYY-MM-DD）格式化为中文报告日期，如 2026-10-09 → 2026 年 10 月 9 日。
+ * 无法解析时原样返回。
+ */
+export function formatDataDate(date: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(date.trim());
+  if (!match) return date;
+  return `${match[1]} 年 ${Number(match[2])} 月 ${Number(match[3])} 日`;
+}
+
 /* ============ 每日持仓（daily-holdings.json） ============ */
 
 export type DailyHoldingEntry = {
