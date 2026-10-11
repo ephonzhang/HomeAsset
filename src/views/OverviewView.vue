@@ -45,10 +45,16 @@ const assetDelta = computed(() => {
   return { delta: cur - prev, pct: ((cur - prev) / prev) * 100 };
 });
 
-/** 持仓速览：按税后股息降序 Top 6 */
-const topDividendRows = computed(() =>
-  [...store.holdingRows].sort((a, b) => b.netDividend - a.netDividend).slice(0, 6)
+/** 建议年支取金额口径：2% 支取率（= 市值 × 2%） */
+const WITHDRAW_RATE = 0.02;
+
+/** 持仓速览：按持仓总金额（折合人民币市值）降序 Top 6 */
+const topHoldings = computed(() =>
+  [...store.holdingRows].sort((a, b) => b.marketValue - a.marketValue).slice(0, 6)
 );
+
+/** 全组合建议年支取金额 = 总资产 × 2% */
+const withdrawTotal = computed(() => store.totalAssets * WITHDRAW_RATE);
 
 /** 净值迷你曲线：最近 90 天总资产 */
 const sparkOption = computed(() => {
@@ -187,6 +193,11 @@ function exportCsv() {
           <p class="gain-value num up">{{ compactMoney(store.totalNetDividend) }}</p>
           <p class="kpi-hint">组合税后股息率 {{ formatPercent(store.dividendYield) }}</p>
         </div>
+        <div class="card card-pad gain-card">
+          <p class="kpi-label">建议年支取金额</p>
+          <p class="gain-value num">{{ compactMoney(withdrawTotal) }}</p>
+          <p class="kpi-hint">按总资产 × 2% 计算 · 月均 {{ compactMoney(withdrawTotal / 12) }}</p>
+        </div>
       </section>
 
       <section class="cover-bottom">
@@ -199,7 +210,7 @@ function exportCsv() {
           <div class="holdings-head">
             <div>
               <h3 class="section-title serif-title">持仓速览</h3>
-              <p class="section-hint">按税后股息降序 Top 标的</p>
+              <p class="section-hint">按持仓总金额（市值）降序 Top 标的</p>
             </div>
             <router-link to="/holdings" class="link-gold">查看完整持仓 →</router-link>
           </div>
@@ -207,7 +218,7 @@ function exportCsv() {
             <div class="mini-row mini-head">
               <span>代码</span><span>名称</span><span class="right">市值</span><span class="right">仓位</span><span class="right">税后股息</span>
             </div>
-            <div v-for="row in topDividendRows" :key="row.code" class="mini-row">
+            <div v-for="row in topHoldings" :key="row.code" class="mini-row">
               <span class="code-cell">{{ row.code }}</span>
               <span class="name-cell">{{ row.name }}</span>
               <span class="right num">{{ compactMoney(row.marketValue) }}</span>

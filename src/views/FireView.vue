@@ -52,15 +52,6 @@ function fmtWan(value: number) {
   return `${numberFormatter.format(Math.round(value / 10000))} 万`;
 }
 
-/** 万元保留一位小数（建议支取金额这种量级用整数万会被抹平） */
-function fmtWan1(value: number) {
-  return `${(value / 10000).toFixed(1)} 万`;
-}
-
-/** 建议年支取金额 = 当前总资产 × 2%（与 FIRE 刻度页的最保守口径一致） */
-const WITHDRAW_RATE = 0.02;
-const suggestedAnnual = computed(() => store.totalAssets * WITHDRAW_RATE);
-
 /* ============ 月度结构（ECharts 堆叠条形图） ============ */
 const segColors = ["#8fa9bf", "#c3d2de", "#4a6b8a", "#c9a96a", "#e3d5b8"];
 const segLabelDark = ["#16324a", "#16324a", "#f3ebdd", "#ffffff", "#16324a"];
@@ -211,31 +202,21 @@ const decisions = [
                   <span>{{ t.label }}<span class="tier-sub">月均 {{ fmt(t.monthly) }}</span></span>
                 </span>
               </th>
-              <th class="th-suggest">建议年支取金额</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(row, ri) in budgetRows" :key="row.item">
+            <tr v-for="row in budgetRows" :key="row.item">
               <td class="item-name">{{ row.item }}<span class="item-sub">{{ row.sub }}</span></td>
               <td v-for="(v, i) in row.values" :key="i" class="num">{{ fmt(v) }}</td>
-              <td v-if="ri === 0" :rowspan="budgetRows.length" class="num col-suggest">
-                <span class="suggest-value">{{ hasPortfolio ? fmtWan1(suggestedAnnual) : "—" }}</span>
-                <span class="suggest-sub">总资产 × 2%</span>
-              </td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
               <td>合计</td>
               <td v-for="t in tiers" :key="t.label" class="num">{{ fmt(t.monthly) }}</td>
-              <td class="col-suggest"></td>
             </tr>
           </tfoot>
         </table>
-        <p class="table-note">
-          建议年支取金额按<b>总资产 × 2%</b>计算<template v-if="hasPortfolio">：当前总资产 {{ fmtWan(store.totalAssets) }} × 2% ≈ {{ fmtWan1(suggestedAnnual) }} / 年
-            （月均约 {{ fmt(Math.round(suggestedAnnual / 12)) }} 元）</template>。
-        </p>
       </div>
     </section>
 
@@ -396,47 +377,6 @@ th .tier-sub {
   font-size: 11px;
   color: var(--ink-faint);
   white-space: normal;
-}
-
-/* ---- 建议年支取金额列（= 总资产 × 2%，整表共用一个值，故跨行合并） ---- */
-.table th.th-suggest {
-  color: var(--gold-deeper);
-}
-
-.table th.th-suggest,
-.table td.col-suggest {
-  background: var(--gold-soft);
-}
-
-.table tbody tr:hover td.col-suggest {
-  background: var(--gold-soft);
-}
-
-.table td.col-suggest {
-  vertical-align: middle;
-}
-
-.suggest-value {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.suggest-sub {
-  display: block;
-  font-size: 10.5px;
-  color: var(--gold-deep);
-}
-
-.table-note {
-  font-size: 11.5px;
-  color: var(--ink-faint);
-  margin: 0;
-  padding: 10px 12px;
-  border-top: 0.5px solid var(--line-soft);
 }
 
 /* ---- 生活画面 ---- */
