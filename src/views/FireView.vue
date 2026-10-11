@@ -138,19 +138,20 @@ const scenes = [
 ];
 
 /* ============ FIRE 本金刻度 ============ */
-/* 目标本金 = 年支出 ÷ 支取率：4% 法则（25 倍）与 3% 保守（33.3 倍）；进度按 3% 口径 */
+/* 目标本金 = 年支出 ÷ 支取率：4% 法则（25 倍）/ 3% 保守（33.3 倍）/ 2% 更保守（50 倍）
+   右侧进度统一按 2% 口径（最保守）计算 */
 const fireTargets = [
-  { label: "40 万档", income: 40, rule4: 10_000_000, rule3: 13_330_000, color: "#4a6b8a" },
-  { label: "60 万档", income: 60, rule4: 15_000_000, rule3: 20_000_000, color: "#c9a96a" },
-  { label: "100 万档", income: 100, rule4: 25_000_000, rule3: 33_330_000, color: "#c0392b" },
+  { label: "40 万档", income: 40, rule4: 10_000_000, rule3: 13_330_000, rule2: 20_000_000, color: "#4a6b8a" },
+  { label: "60 万档", income: 60, rule4: 15_000_000, rule3: 20_000_000, rule2: 30_000_000, color: "#c9a96a" },
+  { label: "100 万档", income: 100, rule4: 25_000_000, rule3: 33_330_000, rule2: 50_000_000, color: "#c0392b" },
 ];
 
-/** 进度 = 当前组合市值 ÷ 3% 口径目标本金（随每日快照更新） */
+/** 进度 = 当前组合市值 ÷ 2% 口径目标本金（随每日快照更新，超 100% 收敛到 100%） */
 const progress = computed(() => {
   const total = store.totalAssets;
   return fireTargets.map((t) => ({
     ...t,
-    pct: total > 0 ? Math.min((total / t.rule3) * 100, 100) : 0,
+    pct: total > 0 ? Math.min((total / t.rule2) * 100, 100) : 0,
     total,
   }));
 });
@@ -253,19 +254,25 @@ const decisions = [
     <section class="section">
       <div class="section-hd">
         <h3 class="section-title serif-title">FIRE 本金刻度</h3>
-        <p class="section-hint">左侧为三档所需本金，右侧为组合市值进度（按 3% 保守口径，随每日快照自动更新）</p>
+        <p class="section-hint">左侧为三档所需本金（4% / 3% / 2% 三档支取率），右侧为组合市值进度（按 2% 更保守口径，随每日快照自动更新）</p>
       </div>
       <div class="fire-grid">
         <div class="card">
           <table class="table">
             <thead>
-              <tr><th>年支出档位</th><th>4% 法则</th><th>3% 保守</th></tr>
+              <tr>
+                <th>年支出档位</th>
+                <th>4% 法则</th>
+                <th>3% 保守</th>
+                <th class="th-progress">2% 更保守<span class="th-tag">进度口径</span></th>
+              </tr>
             </thead>
             <tbody>
               <tr v-for="t in fireTargets" :key="t.label">
                 <td>{{ t.label }}</td>
                 <td class="num">{{ fmtWan(t.rule4) }}</td>
                 <td class="num">{{ fmtWan(t.rule3) }}</td>
+                <td class="num col-progress">{{ fmtWan(t.rule2) }}</td>
               </tr>
             </tbody>
           </table>
@@ -273,7 +280,7 @@ const decisions = [
         <div class="card card-pad">
           <div v-for="p in progress" :key="p.label" class="progress-item">
             <div class="progress-hd">
-              <span>{{ p.label }} · {{ fmtWan(p.rule3) }}</span>
+              <span>{{ p.label }} · {{ fmtWan(p.rule2) }}</span>
               <span class="progress-pct num" :style="{ color: p.color }">{{ hasPortfolio ? p.pct.toFixed(1) + "%" : "—" }}</span>
             </div>
             <div class="progress-track">
@@ -282,7 +289,7 @@ const decisions = [
           </div>
           <p class="progress-note">
             {{ hasPortfolio
-              ? `按当前组合市值 ${fmtWan(store.totalAssets)} 计算`
+              ? `按当前组合市值 ${fmtWan(store.totalAssets)} ÷ 2% 口径目标本金计算`
               : "等待持仓数据加载..." }}
           </p>
         </div>
@@ -451,6 +458,33 @@ th .tier-sub {
   display: grid;
   grid-template-columns: 1.25fr 1fr;
   gap: 14px;
+}
+
+/* ---- 2% 档高亮：右侧进度就是按这一列算的 ---- */
+.table th.th-progress {
+  color: var(--gold-deeper);
+}
+
+.th-tag {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--gold-deep);
+  letter-spacing: 0.02em;
+}
+
+.table th.th-progress,
+.table td.col-progress {
+  background: var(--gold-soft);
+}
+
+.table tbody tr:hover td.col-progress {
+  background: var(--gold-soft);
+}
+
+.table td.col-progress {
+  color: var(--ink);
+  font-weight: 500;
 }
 
 .progress-item {
