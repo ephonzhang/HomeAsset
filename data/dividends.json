@@ -1,0 +1,1037 @@
+{
+ "generatedAt": "2026-10-17T23:13:53+0800",
+ "asOf": "2026-10-16",
+ "window": {
+  "startExclusive": "2025-10-16",
+  "endInclusive": "2026-10-16"
+ },
+ "basis": "按除息日归月（现金到账日见明细）；金额 = 股数 × 每股分红 × 快照日汇率 × (1 − 股息税率)",
+ "fx": {
+  "USD": 6.687,
+  "HKD": 0.85201587,
+  "EUR": 7.5145,
+  "KRW": 0.00501149
+ },
+ "totals": {
+  "gross": 141560.09,
+  "tax": 12976.26,
+  "net": 128583.83
+ },
+ "instruments": [
+  {
+   "code": "TLT",
+   "currency": "USD",
+   "shares": 200.0,
+   "taxRate": 0.0,
+   "periods": 12,
+   "perShareTotal": 3.891381,
+   "gross": 5204.33,
+   "tax": 0.0,
+   "net": 5204.33,
+   "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录（月度）",
+   "events": [
+    {
+     "code": "TLT",
+     "exDate": "2025-11-03",
+     "payDate": "2025-11-06",
+     "perShare": 0.325125,
+     "currency": "USD",
+     "gross": 434.82,
+     "tax": 0.0,
+     "net": 434.82
+    },
+    {
+     "code": "TLT",
+     "exDate": "2025-12-01",
+     "payDate": "2025-12-04",
+     "perShare": 0.320648,
+     "currency": "USD",
+     "gross": 428.83,
+     "tax": 0.0,
+     "net": 428.83
+    },
+    {
+     "code": "TLT",
+     "exDate": "2025-12-19",
+     "payDate": "2025-12-24",
+     "perShare": 0.342437,
+     "currency": "USD",
+     "gross": 457.98,
+     "tax": 0.0,
+     "net": 457.98
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-02-02",
+     "payDate": "2026-02-05",
+     "perShare": 0.331885,
+     "currency": "USD",
+     "gross": 443.86,
+     "tax": 0.0,
+     "net": 443.86
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-03-02",
+     "payDate": "2026-03-05",
+     "perShare": 0.300633,
+     "currency": "USD",
+     "gross": 402.07,
+     "tax": 0.0,
+     "net": 402.07
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-04-01",
+     "payDate": "2026-04-07",
+     "perShare": 0.344779,
+     "currency": "USD",
+     "gross": 461.11,
+     "tax": 0.0,
+     "net": 461.11
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-05-01",
+     "payDate": "2026-05-06",
+     "perShare": 0.315346,
+     "currency": "USD",
+     "gross": 421.74,
+     "tax": 0.0,
+     "net": 421.74
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-06-01",
+     "payDate": "2026-06-04",
+     "perShare": 0.335777,
+     "currency": "USD",
+     "gross": 449.07,
+     "tax": 0.0,
+     "net": 449.07
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-07-01",
+     "payDate": "2026-07-07",
+     "perShare": 0.31803,
+     "currency": "USD",
+     "gross": 425.33,
+     "tax": 0.0,
+     "net": 425.33
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-08-03",
+     "payDate": "2026-08-06",
+     "perShare": 0.330454,
+     "currency": "USD",
+     "gross": 441.95,
+     "tax": 0.0,
+     "net": 441.95
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-09-01",
+     "payDate": "2026-09-04",
+     "perShare": 0.314686,
+     "currency": "USD",
+     "gross": 420.86,
+     "tax": 0.0,
+     "net": 420.86
+    },
+    {
+     "code": "TLT",
+     "exDate": "2026-10-01",
+     "payDate": "2026-10-06",
+     "perShare": 0.311581,
+     "currency": "USD",
+     "gross": 416.71,
+     "tax": 0.0,
+     "net": 416.71
+    }
+   ]
+  },
+  {
+   "code": "000660.KS",
+   "currency": "KRW",
+   "shares": 10.0,
+   "taxRate": 0.22,
+   "periods": 4,
+   "perShareTotal": 3000,
+   "gross": 150.35,
+   "tax": 33.08,
+   "net": 117.27,
+   "source": "StockAnalysis(KRX:000660) 分红记录（S&P Global 数据源）",
+   "events": [
+    {
+     "code": "000660.KS",
+     "exDate": "2025-11-27",
+     "payDate": "2025-12-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-02-26",
+     "payDate": "2026-04-24",
+     "perShare": 1875,
+     "currency": "KRW",
+     "gross": 93.97,
+     "tax": 20.67,
+     "net": 73.29
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-05-28",
+     "payDate": "2026-06-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-08-28",
+     "payDate": "2026-09-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    }
+   ]
+  },
+  {
+   "code": "IYW",
+   "currency": "USD",
+   "shares": 1726.0,
+   "taxRate": 0.1,
+   "periods": 4,
+   "perShareTotal": 0.246192,
+   "gross": 2841.49,
+   "tax": 284.15,
+   "net": 2557.34,
+   "source": "腾讯自选股(westock) 分红记录",
+   "events": [
+    {
+     "code": "IYW",
+     "exDate": "2025-12-16",
+     "payDate": "2025-12-19",
+     "perShare": 0.055415,
+     "currency": "USD",
+     "gross": 639.59,
+     "tax": 63.96,
+     "net": 575.63
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-03-17",
+     "payDate": "2026-03-20",
+     "perShare": 0.069826,
+     "currency": "USD",
+     "gross": 805.92,
+     "tax": 80.59,
+     "net": 725.32
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-06-15",
+     "payDate": "2026-06-18",
+     "perShare": 0.071819,
+     "currency": "USD",
+     "gross": 828.92,
+     "tax": 82.89,
+     "net": 746.03
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-09-15",
+     "payDate": "2026-09-18",
+     "perShare": 0.049132,
+     "currency": "USD",
+     "gross": 567.07,
+     "tax": 56.71,
+     "net": 510.36
+    }
+   ]
+  },
+  {
+   "code": "QQQM",
+   "currency": "USD",
+   "shares": 4990.0,
+   "taxRate": 0.1,
+   "periods": 4,
+   "perShareTotal": 1.31551,
+   "gross": 43896.11,
+   "tax": 4389.61,
+   "net": 39506.5,
+   "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+   "events": [
+    {
+     "code": "QQQM",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-26",
+     "perShare": 0.32301,
+     "currency": "USD",
+     "gross": 10778.24,
+     "tax": 1077.82,
+     "net": 9700.42
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-03-23",
+     "payDate": "2026-03-27",
+     "perShare": 0.32769,
+     "currency": "USD",
+     "gross": 10934.4,
+     "tax": 1093.44,
+     "net": 9840.96
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-06-22",
+     "payDate": "2026-06-26",
+     "perShare": 0.35215,
+     "currency": "USD",
+     "gross": 11750.59,
+     "tax": 1175.06,
+     "net": 10575.53
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-09-21",
+     "payDate": "2026-09-25",
+     "perShare": 0.31266,
+     "currency": "USD",
+     "gross": 10432.88,
+     "tax": 1043.29,
+     "net": 9389.59
+    }
+   ]
+  },
+  {
+   "code": "SMH",
+   "currency": "USD",
+   "shares": 155.0,
+   "taxRate": 0.1,
+   "periods": 1,
+   "perShareTotal": 1.1047,
+   "gross": 1145.01,
+   "tax": 114.5,
+   "net": 1030.51,
+   "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+   "events": [
+    {
+     "code": "SMH",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-26",
+     "perShare": 1.1047,
+     "currency": "USD",
+     "gross": 1145.0,
+     "tax": 114.5,
+     "net": 1030.5
+    }
+   ]
+  },
+  {
+   "code": "VOO",
+   "currency": "USD",
+   "shares": 700.0,
+   "taxRate": 0.1,
+   "periods": 4,
+   "perShareTotal": 7.4282,
+   "gross": 34770.66,
+   "tax": 3477.06,
+   "net": 31293.6,
+   "source": "腾讯自选股(westock) 分红记录",
+   "events": [
+    {
+     "code": "VOO",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-24",
+     "perShare": 1.771,
+     "currency": "USD",
+     "gross": 8289.87,
+     "tax": 828.99,
+     "net": 7460.89
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-03-27",
+     "payDate": "2026-03-31",
+     "perShare": 1.8724,
+     "currency": "USD",
+     "gross": 8764.52,
+     "tax": 876.45,
+     "net": 7888.07
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-06-26",
+     "payDate": "2026-06-30",
+     "perShare": 1.9622,
+     "currency": "USD",
+     "gross": 9184.86,
+     "tax": 918.49,
+     "net": 8266.38
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-09-28",
+     "payDate": "2026-09-30",
+     "perShare": 1.8226,
+     "currency": "USD",
+     "gross": 8531.41,
+     "tax": 853.14,
+     "net": 7678.27
+    }
+   ]
+  },
+  {
+   "code": "CGDV",
+   "currency": "USD",
+   "shares": 1500.0,
+   "taxRate": 0.1,
+   "periods": 4,
+   "perShareTotal": 0.602407,
+   "gross": 6042.44,
+   "tax": 604.24,
+   "net": 5438.2,
+   "source": "腾讯自选股(westock) 分红记录",
+   "events": [
+    {
+     "code": "CGDV",
+     "exDate": "2025-12-26",
+     "payDate": "2025-12-29",
+     "perShare": 0.192823,
+     "currency": "USD",
+     "gross": 1934.11,
+     "tax": 193.41,
+     "net": 1740.7
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-03-31",
+     "payDate": "2026-04-01",
+     "perShare": 0.110308,
+     "currency": "USD",
+     "gross": 1106.44,
+     "tax": 110.64,
+     "net": 995.8
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-06-30",
+     "payDate": "2026-07-01",
+     "perShare": 0.147088,
+     "currency": "USD",
+     "gross": 1475.37,
+     "tax": 147.54,
+     "net": 1327.83
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-09-30",
+     "payDate": "2026-10-01",
+     "perShare": 0.152188,
+     "currency": "USD",
+     "gross": 1526.52,
+     "tax": 152.65,
+     "net": 1373.87
+    }
+   ]
+  },
+  {
+   "code": "0700.HK",
+   "currency": "HKD",
+   "shares": 1500.0,
+   "taxRate": 0.0,
+   "periods": 1,
+   "perShareTotal": 5.3,
+   "gross": 6773.53,
+   "tax": 0.0,
+   "net": 6773.53,
+   "source": "腾讯自选股(westock) 港股分红记录 / 腾讯控股公告",
+   "events": [
+    {
+     "code": "0700.HK",
+     "exDate": "2026-05-15",
+     "payDate": "2026-06-01",
+     "perShare": 5.3,
+     "currency": "HKD",
+     "gross": 6773.53,
+     "tax": 0.0,
+     "net": 6773.53
+    }
+   ]
+  },
+  {
+   "code": "0883.HK",
+   "currency": "HKD",
+   "shares": 30000.0,
+   "taxRate": 0.1,
+   "periods": 2,
+   "perShareTotal": 1.49,
+   "gross": 38085.11,
+   "tax": 3808.51,
+   "net": 34276.6,
+   "source": "腾讯自选股(westock) 港股分红记录 / 中国海洋石油公告",
+   "events": [
+    {
+     "code": "0883.HK",
+     "exDate": "2026-06-11",
+     "payDate": "2026-07-10",
+     "perShare": 0.55,
+     "currency": "HKD",
+     "gross": 14058.26,
+     "tax": 1405.83,
+     "net": 12652.44
+    },
+    {
+     "code": "0883.HK",
+     "exDate": "2026-09-10",
+     "payDate": "2026-10-16",
+     "perShare": 0.94,
+     "currency": "HKD",
+     "gross": 24026.85,
+     "tax": 2402.68,
+     "net": 21624.16
+    }
+   ]
+  },
+  {
+   "code": "QNDX",
+   "currency": "USD",
+   "shares": 14562.0,
+   "taxRate": 0.1,
+   "periods": 1,
+   "perShareTotal": 0.027225,
+   "gross": 2651.06,
+   "tax": 265.11,
+   "net": 2385.95,
+   "source": "腾讯自选股(westock) 分红记录 / Nasdaq 派息记录",
+   "events": [
+    {
+     "code": "QNDX",
+     "exDate": "2026-09-21",
+     "payDate": "2026-09-23",
+     "perShare": 0.027225,
+     "currency": "USD",
+     "gross": 2651.06,
+     "tax": 265.11,
+     "net": 2385.96
+    }
+   ]
+  },
+  {
+   "code": "BITB",
+   "currency": "USD",
+   "shares": 3000.0,
+   "taxRate": 0.0,
+   "periods": 0,
+   "perShareTotal": 0,
+   "gross": 0.0,
+   "tax": 0.0,
+   "net": 0.0,
+   "source": "Bitwise 现货比特币 ETF —— 不分红",
+   "events": []
+  },
+  {
+   "code": "BYTE",
+   "currency": "USD",
+   "shares": 171.0,
+   "taxRate": 0.0,
+   "periods": 0,
+   "perShareTotal": 0,
+   "gross": 0.0,
+   "tax": 0.0,
+   "net": 0.0,
+   "source": "字节跳动内部期权 —— 不分红（用户固定口径）",
+   "events": []
+  }
+ ],
+ "months": [
+  {
+   "month": 1,
+   "year": "2026",
+   "gross": 0.0,
+   "tax": 0.0,
+   "net": 0.0,
+   "items": []
+  },
+  {
+   "month": 2,
+   "year": "2026",
+   "gross": 537.83,
+   "tax": 20.67,
+   "net": 517.16,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-02-02",
+     "payDate": "2026-02-05",
+     "perShare": 0.331885,
+     "currency": "USD",
+     "gross": 443.86,
+     "tax": 0.0,
+     "net": 443.86
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-02-26",
+     "payDate": "2026-04-24",
+     "perShare": 1875,
+     "currency": "KRW",
+     "gross": 93.97,
+     "tax": 20.67,
+     "net": 73.29
+    }
+   ]
+  },
+  {
+   "month": 3,
+   "year": "2026",
+   "gross": 22013.35,
+   "tax": 2161.13,
+   "net": 19852.22,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-03-02",
+     "payDate": "2026-03-05",
+     "perShare": 0.300633,
+     "currency": "USD",
+     "gross": 402.07,
+     "tax": 0.0,
+     "net": 402.07
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-03-17",
+     "payDate": "2026-03-20",
+     "perShare": 0.069826,
+     "currency": "USD",
+     "gross": 805.92,
+     "tax": 80.59,
+     "net": 725.32
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-03-23",
+     "payDate": "2026-03-27",
+     "perShare": 0.32769,
+     "currency": "USD",
+     "gross": 10934.4,
+     "tax": 1093.44,
+     "net": 9840.96
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-03-27",
+     "payDate": "2026-03-31",
+     "perShare": 1.8724,
+     "currency": "USD",
+     "gross": 8764.52,
+     "tax": 876.45,
+     "net": 7888.07
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-03-31",
+     "payDate": "2026-04-01",
+     "perShare": 0.110308,
+     "currency": "USD",
+     "gross": 1106.44,
+     "tax": 110.64,
+     "net": 995.8
+    }
+   ]
+  },
+  {
+   "month": 4,
+   "year": "2026",
+   "gross": 461.11,
+   "tax": 0.0,
+   "net": 461.11,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-04-01",
+     "payDate": "2026-04-07",
+     "perShare": 0.344779,
+     "currency": "USD",
+     "gross": 461.11,
+     "tax": 0.0,
+     "net": 461.11
+    }
+   ]
+  },
+  {
+   "month": 5,
+   "year": "2026",
+   "gross": 7214.06,
+   "tax": 4.14,
+   "net": 7209.92,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-05-01",
+     "payDate": "2026-05-06",
+     "perShare": 0.315346,
+     "currency": "USD",
+     "gross": 421.74,
+     "tax": 0.0,
+     "net": 421.74
+    },
+    {
+     "code": "0700.HK",
+     "exDate": "2026-05-15",
+     "payDate": "2026-06-01",
+     "perShare": 5.3,
+     "currency": "HKD",
+     "gross": 6773.53,
+     "tax": 0.0,
+     "net": 6773.53
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-05-28",
+     "payDate": "2026-06-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    }
+   ]
+  },
+  {
+   "month": 6,
+   "year": "2026",
+   "gross": 37747.06,
+   "tax": 3729.8,
+   "net": 34017.26,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-06-01",
+     "payDate": "2026-06-04",
+     "perShare": 0.335777,
+     "currency": "USD",
+     "gross": 449.07,
+     "tax": 0.0,
+     "net": 449.07
+    },
+    {
+     "code": "0883.HK",
+     "exDate": "2026-06-11",
+     "payDate": "2026-07-10",
+     "perShare": 0.55,
+     "currency": "HKD",
+     "gross": 14058.26,
+     "tax": 1405.83,
+     "net": 12652.44
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-06-15",
+     "payDate": "2026-06-18",
+     "perShare": 0.071819,
+     "currency": "USD",
+     "gross": 828.92,
+     "tax": 82.89,
+     "net": 746.03
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-06-22",
+     "payDate": "2026-06-26",
+     "perShare": 0.35215,
+     "currency": "USD",
+     "gross": 11750.59,
+     "tax": 1175.06,
+     "net": 10575.53
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-06-26",
+     "payDate": "2026-06-30",
+     "perShare": 1.9622,
+     "currency": "USD",
+     "gross": 9184.86,
+     "tax": 918.49,
+     "net": 8266.38
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-06-30",
+     "payDate": "2026-07-01",
+     "perShare": 0.147088,
+     "currency": "USD",
+     "gross": 1475.37,
+     "tax": 147.54,
+     "net": 1327.83
+    }
+   ]
+  },
+  {
+   "month": 7,
+   "year": "2026",
+   "gross": 425.33,
+   "tax": 0.0,
+   "net": 425.33,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-07-01",
+     "payDate": "2026-07-07",
+     "perShare": 0.31803,
+     "currency": "USD",
+     "gross": 425.33,
+     "tax": 0.0,
+     "net": 425.33
+    }
+   ]
+  },
+  {
+   "month": 8,
+   "year": "2026",
+   "gross": 460.74,
+   "tax": 4.13,
+   "net": 456.61,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-08-03",
+     "payDate": "2026-08-06",
+     "perShare": 0.330454,
+     "currency": "USD",
+     "gross": 441.95,
+     "tax": 0.0,
+     "net": 441.95
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2026-08-28",
+     "payDate": "2026-09-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    }
+   ]
+  },
+  {
+   "month": 9,
+   "year": "2026",
+   "gross": 48156.65,
+   "tax": 4773.58,
+   "net": 43383.07,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-09-01",
+     "payDate": "2026-09-04",
+     "perShare": 0.314686,
+     "currency": "USD",
+     "gross": 420.86,
+     "tax": 0.0,
+     "net": 420.86
+    },
+    {
+     "code": "0883.HK",
+     "exDate": "2026-09-10",
+     "payDate": "2026-10-16",
+     "perShare": 0.94,
+     "currency": "HKD",
+     "gross": 24026.85,
+     "tax": 2402.68,
+     "net": 21624.16
+    },
+    {
+     "code": "IYW",
+     "exDate": "2026-09-15",
+     "payDate": "2026-09-18",
+     "perShare": 0.049132,
+     "currency": "USD",
+     "gross": 567.07,
+     "tax": 56.71,
+     "net": 510.36
+    },
+    {
+     "code": "QNDX",
+     "exDate": "2026-09-21",
+     "payDate": "2026-09-23",
+     "perShare": 0.027225,
+     "currency": "USD",
+     "gross": 2651.06,
+     "tax": 265.11,
+     "net": 2385.96
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2026-09-21",
+     "payDate": "2026-09-25",
+     "perShare": 0.31266,
+     "currency": "USD",
+     "gross": 10432.88,
+     "tax": 1043.29,
+     "net": 9389.59
+    },
+    {
+     "code": "VOO",
+     "exDate": "2026-09-28",
+     "payDate": "2026-09-30",
+     "perShare": 1.8226,
+     "currency": "USD",
+     "gross": 8531.41,
+     "tax": 853.14,
+     "net": 7678.27
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2026-09-30",
+     "payDate": "2026-10-01",
+     "perShare": 0.152188,
+     "currency": "USD",
+     "gross": 1526.52,
+     "tax": 152.65,
+     "net": 1373.87
+    }
+   ]
+  },
+  {
+   "month": 10,
+   "year": "2026",
+   "gross": 416.71,
+   "tax": 0.0,
+   "net": 416.71,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2026-10-01",
+     "payDate": "2026-10-06",
+     "perShare": 0.311581,
+     "currency": "USD",
+     "gross": 416.71,
+     "tax": 0.0,
+     "net": 416.71
+    }
+   ]
+  },
+  {
+   "month": 11,
+   "year": "2025",
+   "gross": 453.62,
+   "tax": 4.13,
+   "net": 449.49,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2025-11-03",
+     "payDate": "2025-11-06",
+     "perShare": 0.325125,
+     "currency": "USD",
+     "gross": 434.82,
+     "tax": 0.0,
+     "net": 434.82
+    },
+    {
+     "code": "000660.KS",
+     "exDate": "2025-11-27",
+     "payDate": "2025-12-30",
+     "perShare": 375,
+     "currency": "KRW",
+     "gross": 18.79,
+     "tax": 4.13,
+     "net": 14.66
+    }
+   ]
+  },
+  {
+   "month": 12,
+   "year": "2025",
+   "gross": 23673.63,
+   "tax": 2278.68,
+   "net": 21394.95,
+   "items": [
+    {
+     "code": "TLT",
+     "exDate": "2025-12-01",
+     "payDate": "2025-12-04",
+     "perShare": 0.320648,
+     "currency": "USD",
+     "gross": 428.83,
+     "tax": 0.0,
+     "net": 428.83
+    },
+    {
+     "code": "IYW",
+     "exDate": "2025-12-16",
+     "payDate": "2025-12-19",
+     "perShare": 0.055415,
+     "currency": "USD",
+     "gross": 639.59,
+     "tax": 63.96,
+     "net": 575.63
+    },
+    {
+     "code": "TLT",
+     "exDate": "2025-12-19",
+     "payDate": "2025-12-24",
+     "perShare": 0.342437,
+     "currency": "USD",
+     "gross": 457.98,
+     "tax": 0.0,
+     "net": 457.98
+    },
+    {
+     "code": "QQQM",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-26",
+     "perShare": 0.32301,
+     "currency": "USD",
+     "gross": 10778.24,
+     "tax": 1077.82,
+     "net": 9700.42
+    },
+    {
+     "code": "SMH",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-26",
+     "perShare": 1.1047,
+     "currency": "USD",
+     "gross": 1145.0,
+     "tax": 114.5,
+     "net": 1030.5
+    },
+    {
+     "code": "VOO",
+     "exDate": "2025-12-22",
+     "payDate": "2025-12-24",
+     "perShare": 1.771,
+     "currency": "USD",
+     "gross": 8289.87,
+     "tax": 828.99,
+     "net": 7460.89
+    },
+    {
+     "code": "CGDV",
+     "exDate": "2025-12-26",
+     "payDate": "2025-12-29",
+     "perShare": 0.192823,
+     "currency": "USD",
+     "gross": 1934.11,
+     "tax": 193.41,
+     "net": 1740.7
+    }
+   ]
+  }
+ ]
+}
